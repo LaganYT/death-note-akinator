@@ -199,44 +199,138 @@ h2 {
 }
 
 /* ─────────────────────────────────────────
-   DEATH NOTE  (final reveal)
+   DEATH NOTE  (3D book-opening reveal)
 ───────────────────────────────────────── */
 .death-note {
-  position: relative;
-  display: flex;
-  flex-direction: column;
+  perspective: 1800px;
   margin: 8px 0 22px;
-  border-radius: 6px;
-  box-shadow:
-    0 24px 60px rgba(0, 0, 0, 0.7),
-    0 0 0 1px rgba(0, 0, 0, 0.6);
-  overflow: hidden;
-  animation: dn-open 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: dn-rise 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-@keyframes dn-open {
+@keyframes dn-rise {
   from {
     opacity: 0;
-    transform: translateY(14px) scale(0.97);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 }
 
-/* Black gothic cover header */
-.death-note-cover {
+.dn-book {
+  position: relative;
+  transform-style: preserve-3d;
+  border-radius: 4px 7px 7px 4px;
+  /* faint spine shadow + drop shadow under the book */
+  box-shadow:
+    0 26px 60px rgba(0, 0, 0, 0.7),
+    -10px 0 22px rgba(0, 0, 0, 0.5);
+}
+
+/* shared aged-page surface */
+.dn-base-page,
+.dn-flip-page {
+  background:
+    repeating-linear-gradient(
+      180deg,
+      transparent,
+      transparent 33px,
+      rgba(120, 30, 30, 0.2) 33px,
+      rgba(120, 30, 30, 0.2) 34px
+    ),
+    linear-gradient(180deg, #f1e8d4 0%, #e6dabd 100%);
+}
+
+/* The final page that is revealed */
+.dn-base-page {
+  position: relative;
+  padding: 22px 22px 24px;
+  border-radius: 4px 7px 7px 4px;
+  color: #2b2118;
+  z-index: 1;
+}
+
+/* red margin line on the left */
+.dn-base-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 40px;
+  width: 1px;
+  background: rgba(150, 40, 40, 0.4);
+}
+
+/* Blank pages that turn while the book opens */
+.dn-flip-page {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px 7px 7px 4px;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  box-shadow: 1px 0 8px rgba(0, 0, 0, 0.25);
+}
+
+.dn-flip-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 40px;
+  width: 1px;
+  background: rgba(150, 40, 40, 0.32);
+}
+
+.dn-flip-1 {
+  z-index: 4;
+  animation: dn-turn-page 720ms cubic-bezier(0.4, 0.05, 0.3, 1) 1000ms both;
+}
+
+.dn-flip-2 {
+  z-index: 3;
+  animation: dn-turn-page 760ms cubic-bezier(0.4, 0.05, 0.3, 1) 1320ms both;
+}
+
+@keyframes dn-turn-page {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(-168deg);
+  }
+}
+
+/* The black gothic cover that swings open */
+.dn-cover {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  padding: 18px 16px 16px;
+  gap: 5px;
+  border-radius: 4px 7px 7px 4px;
   background:
-    radial-gradient(circle at 50% 0%, rgba(60, 60, 60, 0.35), transparent 70%),
-    #08080a;
-  border-bottom: 2px solid #000;
+    radial-gradient(circle at 50% 32%, rgba(64, 64, 68, 0.45), transparent 72%),
+    linear-gradient(135deg, #101013 0%, #08080a 60%, #0d0d10 100%);
+  border: 1px solid #000;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.6);
+  animation: dn-open-cover 1150ms cubic-bezier(0.33, 0.05, 0.2, 1) 250ms both;
+}
+
+@keyframes dn-open-cover {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(-162deg);
+  }
 }
 
 .dn-title {
@@ -253,33 +347,6 @@ h2 {
   letter-spacing: 0.5em;
   color: #6e6e72;
   padding-left: 0.5em;
-}
-
-/* Aged ruled page */
-.death-note-page {
-  position: relative;
-  padding: 22px 22px 24px;
-  background:
-    repeating-linear-gradient(
-      180deg,
-      transparent,
-      transparent 33px,
-      rgba(120, 30, 30, 0.22) 33px,
-      rgba(120, 30, 30, 0.22) 34px
-    ),
-    linear-gradient(180deg, #f0e7d2 0%, #e6dabd 100%);
-  color: #2b2118;
-}
-
-/* red margin line on the left */
-.death-note-page::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 40px;
-  width: 1px;
-  background: rgba(150, 40, 40, 0.4);
 }
 
 .dn-rule {
@@ -317,7 +384,7 @@ h2 {
   line-height: 1.1;
   transform: rotate(-1.5deg);
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
-  animation: dn-write 900ms steps(24) 350ms both;
+  animation: dn-write 950ms steps(26) 2050ms both;
   overflow: hidden;
   white-space: nowrap;
   vertical-align: bottom;
@@ -340,12 +407,28 @@ h2 {
   margin-top: 4px;
   transform: rotate(-0.8deg);
   opacity: 0;
-  animation: dn-fade 400ms ease 1250ms both;
+  animation: dn-fade 450ms ease 3000ms both;
 }
 
 @keyframes dn-fade {
   to {
     opacity: 1;
+  }
+}
+
+/* Respect reduced-motion: reveal immediately, no flipping */
+@media (prefers-reduced-motion: reduce) {
+  .death-note,
+  .dn-name,
+  .dn-alias {
+    animation: none;
+    opacity: 1;
+    max-width: 100%;
+  }
+
+  .dn-cover,
+  .dn-flip-page {
+    display: none;
   }
 }
 

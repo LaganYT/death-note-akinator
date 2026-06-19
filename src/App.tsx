@@ -91,22 +91,33 @@ function App() {
           <div className="state-card guess-card">
             <p className="eyebrow">Final Deduction</p>
 
-            <div className="death-note" aria-label={`Death Note — the name written inside is ${topCandidate?.character.name}`}>
-              <div className="death-note-cover">
-                <span className="dn-title">DEATH NOTE</span>
-                <span className="dn-subtitle">デスノート</span>
-              </div>
-              <div className="death-note-page">
-                <p className="dn-rule">How to use it</p>
-                <p className="dn-instruction">
-                  The human whose name is written in this note shall die.
-                </p>
-                <div className="dn-written-line">
-                  <span className="dn-name" key={topCandidate?.character.id}>
-                    {topCandidate?.character.name}
-                  </span>
+            <div
+              className="death-note"
+              key={topCandidate?.character.id}
+              aria-label={`Death Note — the name written inside is ${topCandidate?.character.name}`}
+            >
+              <div className="dn-book">
+                {/* The page that is finally revealed */}
+                <div className="dn-base-page">
+                  <p className="dn-rule">How to use it</p>
+                  <p className="dn-instruction">
+                    The human whose name is written in this note shall die.
+                  </p>
+                  <div className="dn-written-line">
+                    <span className="dn-name">{topCandidate?.character.name}</span>
+                  </div>
+                  <p className="dn-alias">{topCandidate?.character.alias}</p>
                 </div>
-                <p className="dn-alias">{topCandidate?.character.alias}</p>
+
+                {/* Pages that flip as the book opens */}
+                <div className="dn-flip-page dn-flip-1" aria-hidden="true" />
+                <div className="dn-flip-page dn-flip-2" aria-hidden="true" />
+
+                {/* The cover that swings open */}
+                <div className="dn-cover" aria-hidden="true">
+                  <span className="dn-title">DEATH NOTE</span>
+                  <span className="dn-subtitle">デスノート</span>
+                </div>
               </div>
             </div>
 

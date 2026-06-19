@@ -107,10 +107,28 @@ function App() {
 
         /* Guess */
         ) : isGuessing || !currentQuestion ? (
-          <div className="state-card">
+          <div className="state-card guess-card">
             <p className="eyebrow">Final Deduction</p>
-            <h2>{topCandidate?.character.name}</h2>
-            <p className="alias-tag">{topCandidate?.character.alias}</p>
+
+            <div className="death-note" aria-label={`Death Note — the name written inside is ${topCandidate?.character.name}`}>
+              <div className="death-note-cover">
+                <span className="dn-title">DEATH NOTE</span>
+                <span className="dn-subtitle">デスノート</span>
+              </div>
+              <div className="death-note-page">
+                <p className="dn-rule">How to use it</p>
+                <p className="dn-instruction">
+                  The human whose name is written in this note shall die.
+                </p>
+                <div className="dn-written-line">
+                  <span className="dn-name" key={topCandidate?.character.id}>
+                    {topCandidate?.character.name}
+                  </span>
+                </div>
+                <p className="dn-alias">{topCandidate?.character.alias}</p>
+              </div>
+            </div>
+
             <p className="description-text">{topCandidate?.character.description}</p>
             <div className="score-row">
               <div>

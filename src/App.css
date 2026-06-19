@@ -1,0 +1,333 @@
+.app-shell {
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(320px, 0.82fr) minmax(420px, 1.18fr);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px) 0 0 / 38px 38px,
+    radial-gradient(circle at 18% 18%, rgba(153, 24, 24, 0.28), transparent 28%),
+    linear-gradient(135deg, #050505 0%, #12110d 54%, #21140f 100%);
+}
+
+.brand-panel,
+.play-panel {
+  min-height: 100svh;
+  padding: clamp(24px, 5vw, 64px);
+}
+
+.brand-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid rgba(233, 213, 161, 0.16);
+}
+
+.sigil {
+  width: 124px;
+  height: 124px;
+  position: relative;
+  margin-bottom: 34px;
+  border: 1px solid rgba(233, 213, 161, 0.36);
+  border-radius: 50%;
+  background:
+    linear-gradient(45deg, transparent 47%, rgba(172, 24, 24, 0.74) 48%, rgba(172, 24, 24, 0.74) 52%, transparent 53%),
+    linear-gradient(-45deg, transparent 47%, rgba(233, 213, 161, 0.46) 48%, rgba(233, 213, 161, 0.46) 52%, transparent 53%),
+    #11100d;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+
+.sigil span {
+  position: absolute;
+  inset: 24px;
+  border: 1px solid rgba(233, 213, 161, 0.5);
+  transform: rotate(45deg);
+}
+
+.eyebrow,
+.chapter,
+.progress-row,
+.list-header,
+.case-file span,
+.deduction-grid span {
+  margin: 0;
+  color: #c6ad79;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  max-width: 11ch;
+  margin-top: 12px;
+  color: #f4ead4;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(3rem, 7vw, 6.7rem);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: 0;
+}
+
+h2 {
+  color: #f4ead4;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: 0;
+}
+
+.intro {
+  max-width: 45ch;
+  margin-top: 28px;
+  color: #cfc4ac;
+  font-size: 1.02rem;
+}
+
+.case-file,
+.deduction-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 42px;
+  overflow: hidden;
+  border: 1px solid rgba(233, 213, 161, 0.16);
+  border-radius: 8px;
+  background: rgba(233, 213, 161, 0.14);
+}
+
+.case-file div,
+.deduction-grid div {
+  min-width: 0;
+  padding: 16px;
+  background: rgba(11, 10, 8, 0.72);
+}
+
+.case-file strong,
+.deduction-grid strong {
+  display: block;
+  margin-top: 8px;
+  color: #fff9e8;
+  font-size: 1.45rem;
+}
+
+.play-panel {
+  display: grid;
+  grid-template-rows: minmax(380px, 1fr) auto;
+  gap: 22px;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px) 0 0 / 100% 34px,
+    rgba(10, 9, 7, 0.58);
+}
+
+.start-state,
+.question-state,
+.guess-state,
+.candidate-list {
+  border: 1px solid rgba(233, 213, 161, 0.18);
+  border-radius: 8px;
+  background: rgba(13, 12, 10, 0.86);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.34);
+}
+
+.start-state,
+.question-state,
+.guess-state {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(24px, 4vw, 54px);
+}
+
+.start-state p:not(.chapter),
+.guess-state p:not(.chapter):not(.alias) {
+  max-width: 58ch;
+  margin-top: 18px;
+  color: #d6c9b0;
+}
+
+.primary-action,
+.ghost-action,
+.answer-grid button {
+  min-height: 48px;
+  border: 1px solid rgba(233, 213, 161, 0.28);
+  border-radius: 6px;
+  color: #fff8e4;
+  background: rgba(233, 213, 161, 0.08);
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+.primary-action {
+  width: fit-content;
+  margin-top: 32px;
+  padding: 0 22px;
+  border-color: rgba(174, 35, 35, 0.74);
+  background: #8e1818;
+  font-weight: 800;
+}
+
+.primary-action:hover,
+.answer-grid button:hover,
+.ghost-action:hover {
+  transform: translateY(-1px);
+  border-color: rgba(245, 224, 178, 0.68);
+  background: rgba(174, 35, 35, 0.68);
+}
+
+.progress-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.progress-track {
+  width: 100%;
+  height: 7px;
+  margin: 18px 0 46px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(233, 213, 161, 0.14);
+}
+
+.progress-track div {
+  height: 100%;
+  border-radius: inherit;
+  background: #b72a2a;
+  transition: width 180ms ease;
+}
+
+.answer-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 38px;
+}
+
+.answer-grid button {
+  padding: 0 12px;
+  white-space: normal;
+}
+
+.ghost-action {
+  width: fit-content;
+  min-height: 40px;
+  margin-top: 22px;
+  padding: 0 16px;
+  color: #d7c49b;
+}
+
+.alias {
+  margin-top: 10px;
+  color: #c6ad79;
+  font-weight: 800;
+}
+
+.deduction-grid {
+  max-width: 360px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.candidate-list {
+  padding: 18px;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.candidate {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 48px;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 0;
+  border-top: 1px solid rgba(233, 213, 161, 0.12);
+}
+
+.candidate > span {
+  color: #8f8060;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.candidate strong {
+  display: block;
+  overflow: hidden;
+  color: #f2e6cf;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.candidate small {
+  display: block;
+  overflow: hidden;
+  margin-top: 2px;
+  color: #a99b80;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.candidate b {
+  justify-self: end;
+  color: #e0c17d;
+}
+
+@media (max-width: 940px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-panel,
+  .play-panel {
+    min-height: auto;
+  }
+
+  .brand-panel {
+    border-right: 0;
+    border-bottom: 1px solid rgba(233, 213, 161, 0.16);
+  }
+
+  h1 {
+    max-width: 13ch;
+  }
+
+  .play-panel {
+    grid-template-rows: auto auto;
+  }
+}
+
+@media (max-width: 620px) {
+  .brand-panel,
+  .play-panel {
+    padding: 20px;
+  }
+
+  .sigil {
+    width: 86px;
+    height: 86px;
+    margin-bottom: 24px;
+  }
+
+  .case-file {
+    grid-template-columns: 1fr;
+  }
+
+  .answer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .progress-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+}
